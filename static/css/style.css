@@ -1,0 +1,11 @@
+body { font-family: Arial, sans-serif; margin: 20px; }
+.tabs button { padding: 10px; margin: 5px; }
+.tab-content { margin-top: 20px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+.charts { display: flex; justify-content: space-around; }
+.latest-message { border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; background-color: #f9f9f9; }
+.circular { border-radius: 50%; object-fit: cover; width: 100px; height: 100px; }
+.profile-image { display: inline-block; }
+.lang-switch { margin: 10px 0; }

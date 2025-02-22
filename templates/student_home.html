@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans %}Student Dashboard{% endtrans %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>{% trans %}Welcome{% endtrans %}, {{ student[1] }}</h1>
+    <div class="profile-image">
+        <img src="{{ url_for('static', filename=student[5][7:] if student[5] else 'uploads/default.jpg') }}" alt="Profile" class="circular">
+        <form method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="image_submit" value="1">
+            <label for="profile_image">{% trans %}Choose Profile Image{% endtrans %}</label>
+            <input type="file" id="profile_image" name="profile_image" accept=".jpg,.jpeg,.png" title="{% trans %}Select an image file{% endtrans %}" placeholder="{% trans %}No file chosen{% endtrans %}">
+            <input type="submit" value="{% trans %}Upload Image{% endtrans %}">
+        </form>
+    </div>
+    <p>{% trans %}Roll No{% endtrans %}: {{ student[2] }} | {% trans %}Class{% endtrans %}: {{ student[3] }} | {% trans %}Phone{% endtrans %}: {{ student[4] }}</p>
+    <a href="{{ url_for('student_logout') }}">{% trans %}Logout{% endtrans %}</a>
+    <form method="POST" class="lang-switch" aria-label="{% trans %}Language Switch{% endtrans %}">
+        <label for="language-select" class="visually-hidden">{% trans %}Select Language{% endtrans %}</label>
+        <select id="language-select" name="lang" onchange="this.form.submit()">
+            <option value="en" {% if session.lang == 'en' %}selected{% endif %}>English</option>
+            <option value="hi" {% if session.lang == 'hi' %}selected{% endif %}>हिन्दी</option>
+            <option value="kn" {% if session.lang == 'kn' %}selected{% endif %}>ಕನ್ನಡ</option>
+        </select>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <h2>{% trans %}Academic Performance{% endtrans %}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>{% trans %}Subject{% endtrans %}</th>
+                <th>{% trans %}Attendance (%){% endtrans %}</th>
+                <th>{% trans %}Marks{% endtrans %}</th>
+                <th>{% trans %}Remarks{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subject, data in academic_data.items() %}
+                <tr>
+                    <td>{{ subject }}</td>
+                    <td>{{ data.attendance }}</td>
+                    <td>{{ data.marks }}</td>
+                    <td>{{ data.remarks }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="charts">
+        <canvas id="marksPieChart" width="400" height="400"></canvas>
+        <canvas id="attendancePieChart" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+        function openTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+            document.getElementById(tabName).style.display = 'block';
+        }
+        openTab('performance');
+    </script>
+</body>
+</html>
