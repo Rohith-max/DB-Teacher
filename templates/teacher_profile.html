@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans %}Teacher Profile{% endtrans %} - {{ teacher[1] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>{{ teacher[1] }} {% trans %}'s Profile{% endtrans %} ({{ teacher[4] }})</h1>
+    <p>{% trans %}Email{% endtrans %}: {{ teacher[2] }} | {% trans %}Phone{% endtrans %}: {{ teacher[5] }}</p>
+    <a href="{{ url_for('teacher_dashboard') }}">{% trans %}Back to Dashboard{% endtrans %}</a> | <a href="{{ url_for('teacher_logout') }}">{% trans %}Logout{% endtrans %}</a>
+
+    <h2>{% trans %}Academic Updates{% endtrans %}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>{% trans %}Student{% endtrans %}</th>
+                <th>{% trans %}Roll No{% endtrans %}</th>
+                <th>{% trans %}Attendance{% endtrans %}</th>
+                <th>{% trans %}Marks{% endtrans %}</th>
+                <th>{% trans %}Remarks{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for acad in academics %}
+                <tr>
+                    <td>{{ acad[0] }}</td>
+                    <td>{{ acad[1] }}</td>
+                    <td>{{ acad[2] }}</td>
+                    <td>{{ acad[3] }}</td>
+                    <td>{{ acad[4] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>{% trans %}Notifications Sent{% endtrans %}</h2>
+    <ul>
+        {% for note in notifications %}
+            <li>{{ note[0] }} ({{ note[1] }}): {{ note[2] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

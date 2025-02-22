@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans %}Admin Overview{% endtrans %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>{% trans %}Admin Overview (HOD){% endtrans %}</h1>
+    
+    <h2>{% trans %}Teachers{% endtrans %}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <th>{% trans %}Email{% endtrans %}</th>
+                <th>{% trans %}Subject{% endtrans %}</th>
+                <th>{% trans %}Phone{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for teacher in teachers %}
+                <tr>
+                    <td>{{ teacher[1] }}</td>
+                    <td>{{ teacher[2] }}</td>
+                    <td>{{ teacher[4] }}</td>
+                    <td>{{ teacher[5] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>{% trans %}Students{% endtrans %}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <th>{% trans %}Roll No{% endtrans %}</th>
+                <th>{% trans %}Class{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+                <tr>
+                    <td>{{ student[1] }}</td>
+                    <td>{{ student[2] }}</td>
+                    <td>{{ student[3] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>{% trans %}Recent Academic Updates{% endtrans %}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>{% trans %}Student{% endtrans %}</th>
+                <th>{% trans %}Teacher{% endtrans %}</th>
+                <th>{% trans %}Subject{% endtrans %}</th>
+                <th>{% trans %}Attendance{% endtrans %}</th>
+                <th>{% trans %}Marks{% endtrans %}</th>
+                <th>{% trans %}Remarks{% endtrans %}</th>
+                <th>{% trans %}Time{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for acad in recent_academics %}
+                <tr>
+                    <td>{{ acad[6] }}</td>
+                    <td>{{ acad[7] }}</td>
+                    <td>{{ acad[2] }}</td>
+                    <td>{{ acad[3] }}</td>
+                    <td>{{ acad[4] }}</td>
+                    <td>{{ acad[5] }}</td>
+                    <td>{{ acad[8] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>{% trans %}HOD Logs{% endtrans %}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>{% trans %}Time{% endtrans %}</th>
+                <th>{% trans %}Action{% endtrans %}</th>
+                <th>{% trans %}Details{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+                <tr>
+                    <td>{{ log[1] }}</td>
+                    <td>{{ log[2] }}</td>
+                    <td>{{ log[3] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
